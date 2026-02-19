@@ -42,7 +42,7 @@ jobs:
 
       - name: build and push docker image 
         run: |
-          smurf sdkr provision-hub build anketclouddrove/ci:123 --file ci/Dockerfile 
+          smurf sdkr provision-hub anketclouddrove/ci:123 --file ci/Dockerfile 
 
       # - name: Build and Push Docker Image
       #   uses: clouddrove/github-shared-workflows/.github/workflows/smurf-docker.yml@feat/smurf_docker
