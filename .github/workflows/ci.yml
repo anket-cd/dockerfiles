@@ -49,7 +49,7 @@ jobs:
       # 6️⃣ Build & Push using Smurf
       - name: Build and Push Docker Image
         run: |
-          smurf sdkr provision-hub $IMAGE_NAME:${{ github.sha }} \
+          smurf sdkr provision-hub $IMAGE_NAME: ${{ steps.meta.outputs.tags }} \
             --file ci/Dockerfile \
             --build-arg DOCKER_USERNAME=$DOCKER_USERNAME \
             --build-arg DOCKER_PASSWORD=$DOCKER_PASSWORD
