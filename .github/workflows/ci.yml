@@ -4,13 +4,6 @@ on:
   push:
     branches:
       - main
-    paths:
-      - 'ci/**'
-  pull_request:
-    branches:
-      - main
-    paths:
-      - 'ci/**'
 
 jobs:
   build-and-push:
