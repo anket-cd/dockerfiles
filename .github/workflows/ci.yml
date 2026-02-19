@@ -35,12 +35,20 @@ jobs:
             type=raw,value=0.0.2,enable={{is_default_branch}}
             type=raw,value=latest,enable={{is_default_branch}}
 
-      - name: Build and Push Docker Image
-        uses: clouddrove/github-shared-workflows/.github/workflows/smurf-docker.yml@feat/smurf-docker
-
+      - name: setup smurf
+        uses: clouddrove/smurf@v0.1.3
         with:
-          image_name: anketclouddrove/ci
-          dockerfile_path: ci/Dockerfile
-          context: ci
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          version: latest
+
+      - name: build and push docker image 
+        run: |
+          smurf sdkr provision-hub anketclouddrove/ci:${{ steps.meta.outputs.tags }} --context . --file ci/Dockerfile
+
+      # - name: Build and Push Docker Image
+      #   uses: clouddrove/github-shared-workflows/.github/workflows/smurf-docker.yml@feat/smurf-docker
+      #   with:
+      #     image_name: anketclouddrove/ci
+      #     dockerfile_path: ci/Dockerfile
+      #     context: ci
+      #     tags: ${{ steps.meta.outputs.tags }}
+      #     labels: ${{ steps.meta.outputs.labels }}
