@@ -3,12 +3,12 @@ name: Build and Push CI Docker Image
 on:
   push:
     branches:
-      - master
+      - main
     paths:
       - 'ci/**'
   pull_request:
     branches:
-      - master
+      - main
     paths:
       - 'ci/**'
 
