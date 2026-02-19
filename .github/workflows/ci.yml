@@ -8,6 +8,10 @@ on:
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
+    env:
+      IMAGE_NAME: anketclouddrove/ci
+      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
     if: github.event_name == 'push' || github.event_name == 'pull_request'
     
     steps:
@@ -40,9 +44,17 @@ jobs:
         with:
           version: latest
 
-      - name: build and push docker image 
+      - name: build and push docker image
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         run: |
-          smurf sdkr provision-hub anketclouddrove/ci:123 --file ci/Dockerfile 
+                - name: Build and Push Docker Image
+        run: |
+          smurf sdkr provision-hub $IMAGE_NAME:${{ github.sha }} \
+            --file ci/Dockerfile \
+            --build-arg DOCKER_USERNAME=$DOCKER_USERNAME \
+            --build-arg DOCKER_PASSWORD=$DOCKER_PASSWORD
 
       # - name: Build and Push Docker Image
       #   uses: clouddrove/github-shared-workflows/.github/workflows/smurf-docker.yml@feat/smurf_docker
