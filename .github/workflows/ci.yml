@@ -40,15 +40,15 @@ jobs:
         with:
           version: latest
 
-      - name: build and push docker image 
-        run: |
-          smurf sdkr build anketclouddrove/ci:${{ steps.meta.outputs.tags }} --file ./ci/Dockerfile 
+      # - name: build and push docker image 
+      #   run: |
+      #     smurf sdkr build anketclouddrove/ci:${{ steps.meta.outputs.tags }} --file ci/Dockerfile 
 
-      # - name: Build and Push Docker Image
-      #   uses: clouddrove/github-shared-workflows/.github/workflows/smurf-docker.yml@feat/smurf-docker
-      #   with:
-      #     image_name: anketclouddrove/ci
-      #     dockerfile_path: ci/Dockerfile
-      #     context: ci
-      #     tags: ${{ steps.meta.outputs.tags }}
-      #     labels: ${{ steps.meta.outputs.labels }}
+      - name: Build and Push Docker Image
+        uses: clouddrove/github-shared-workflows/.github/workflows/smurf-docker.yml@feat/smurf_docker
+        with:
+          image_name: anketclouddrove/ci
+          dockerfile_path: ci/Dockerfile
+          context: ci
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
