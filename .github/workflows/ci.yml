@@ -36,7 +36,7 @@ jobs:
             type=raw,value=latest,enable={{is_default_branch}}
 
       - name: Build and Push Docker Image
-        uses: clouddrove/github-shared-workflows/blob/master/.github/workflows/smurf-docker.yml@feat/smurf-docker
+        uses: clouddrove/github-shared-workflows/blob/feat/smurf-docker/.github/workflows/smurf-docker.yml
         with:
           image_name: anketclouddrove/ci
           dockerfile_path: ci/Dockerfile
