@@ -46,6 +46,10 @@ jobs:
         with:
           version: latest
 
+      - name: docker build
+        run: |
+          docker build -t $IMAGE_NAME:${{ steps.meta.outputs.tags }} -f ci/Dockerfile
+
       # 6️⃣ Build & Push using Smurf
       - name: Build and Push Docker Image
         run: |
